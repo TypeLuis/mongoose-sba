@@ -1,0 +1,43 @@
+// MAKE SURE REST CLIENT IS INSTALLED TO USE THIS FILE
+
+// TEST ROUTES //
+
+// Creates an item
+POST http://localhost:3040/api/test/
+Content-Type: application/json
+
+{
+    "name": "Green Onion",
+    "category": "Vegetables",
+    "price": 1.29,
+    "stocked": true
+}
+
+###
+
+// GETS all item
+GET http://localhost:3040/api/test/
+
+###
+
+// Updates JSON
+// SWAP ID with actual ID
+PUT http://localhost:3040/api/test/:ID
+Content-Type: application/json
+
+{
+    "price": 1.59,
+    "stocked": false
+}
+
+###
+
+// Deletes an Item
+// SWAP ID with actual ID
+DELETE http://localhost:3040/api/test/:ID
+
+###
+
+// Gets one Item
+// SWAP ID with actual ID
+GET  http://localhost:3040/api/test/:ID

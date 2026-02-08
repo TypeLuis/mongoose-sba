@@ -1,0 +1,35 @@
+{
+  "name": "server1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsx --watch ./server.ts",
+    "initialize": "npx tsc --init",
+    "seed": "npx tsx ./utilities/seed.ts",
+    "env": "node -e \"require('fs').copyFileSync('.env.example', '.env')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cli-table": "^0.3.11",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.6",
+    "rowdy-logger": "^1.0.2",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/mongodb": "^4.0.6",
+    "@types/mongoose": "^5.11.96",
+    "@types/node": "^25.1.0"
+  }
+}
