@@ -16,3 +16,7 @@
 
 
 # Test route is merely there for testing and referencing.
+
+- ## to see the pdf file, download the pdf viewer extention by `Mathematic inc`
+
+- ## MAKE SURE REST CLIENT IS INSTALLED TO USE app.http
