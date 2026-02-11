@@ -13,16 +13,17 @@ const connectionStr = process.env.MONGODB_URI || ""
 const seedData = async <T> (model: Model<T>, data:any[]): Promise<void> => {
     await model.deleteMany({})
     await model.insertMany(data)
+    console.log("seeded", data)
 }
 
 async function seedDatabase(){
     try {
         await mongoose.connect(connectionStr)
 
-        seedData(User, users)
-        seedData(Listing, listings)
-        seedData(Offer, offers)
-        seedData(Transaction, transactions)
+        await seedData(User, users)
+        await seedData(Listing, listings)
+        await seedData(Offer, offers)
+        await seedData(Transaction, transactions)
 
         console.log("Data seeded successfully")
 
