@@ -65,7 +65,6 @@ const listingSchema = new mongoose.Schema(
   }
 )
 
-// Required by rubric
 listingSchema.index({ category: 1, price: 1 })
 
 // Helpful seller dashboard query

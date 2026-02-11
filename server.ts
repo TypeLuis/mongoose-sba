@@ -18,8 +18,8 @@ const routesReport = rowdy.begin(app)
 
 
 // Middleware
-app.use(helmet());
-app.use(cors())
+app.use(helmet()); // Adds security-related HTTP headers to help protect the app from common web vulnerabilities
+app.use(cors()) // Allows controlled cross-origin requests so frontend apps on other domains can access this API
 app.use(express.json()) // allows to use json like getting req.body
 app.use(logReq);
 

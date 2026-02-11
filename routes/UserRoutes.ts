@@ -25,7 +25,7 @@ router
 
   .get(async (_req, res, next) => {
     try {
-      const allUsers = await User.find({}).sort({ createdAt: -1 })
+      const allUsers = await User.find({}).sort({ createdAt: -1 }) // finds all the users created at in decending order
       res.json(allUsers)
     } catch (err) {
       next(err)
