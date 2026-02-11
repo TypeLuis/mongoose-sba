@@ -7,6 +7,11 @@ import dotenv from "dotenv";
 import connectDB from "./database/conn.js";
 import cors from "cors";
 import helmet from "helmet";
+import userRoutes from "./routes/UserRoutes.js";
+import listingRoutes from "./routes/ListingRoutes.js";
+import offerRoutes from "./routes/OfferRoutes.js";
+import transactionRoutes from "./routes/TransactionRoute.js";
+
 
 // Setup
 dotenv.config() // loads the env file
@@ -25,11 +30,10 @@ app.use(logReq);
 
 
 // Routes
-app.get('/', (_req, res, _next) => {
-    res.send('Hello!')
-})
-
-
+app.use('/api/users', userRoutes)
+app.use('/api/listings', listingRoutes)
+app.use('/api/offers', offerRoutes)
+app.use('/api/transactions', transactionRoutes)
 
 
 // Error Middleware

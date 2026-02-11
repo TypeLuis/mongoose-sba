@@ -17,7 +17,7 @@
 # ============================================================
 
 ### Create user
-POST {{baseUrl}}/users
+POST {{baseUrl}}/api/users
 Content-Type: {{json}}
 
 {
@@ -26,13 +26,13 @@ Content-Type: {{json}}
 }
 
 ### Get all users
-GET {{baseUrl}}/users
+GET {{baseUrl}}/api/users
 
 ### Get user by id
-GET {{baseUrl}}/users/{{userIdSeller}}
+GET {{baseUrl}}/api/users/{{userIdSeller}}
 
 ### Patch user (partial update)
-PATCH {{baseUrl}}/users/{{userIdSeller}}
+PATCH {{baseUrl}}/api/users/{{userIdSeller}}
 Content-Type: {{json}}
 
 {
@@ -40,7 +40,7 @@ Content-Type: {{json}}
 }
 
 ### Put user (full replace)
-PUT {{baseUrl}}/users/{{userIdSeller}}
+PUT {{baseUrl}}/api/users/{{userIdSeller}}
 Content-Type: {{json}}
 
 {
@@ -49,14 +49,14 @@ Content-Type: {{json}}
 }
 
 ### Delete user
-DELETE {{baseUrl}}/users/{{userIdSeller}}
+DELETE {{baseUrl}}/api/users/{{userIdSeller}}
 
 # ============================================================
 # LISTINGS
 # ============================================================
 
 ### Create listing
-POST {{baseUrl}}/listings
+POST {{baseUrl}}/api/listings
 Content-Type: {{json}}
 
 {
@@ -69,25 +69,25 @@ Content-Type: {{json}}
 }
 
 ### Get all listings (no filters)
-GET {{baseUrl}}/listings
+GET {{baseUrl}}/api/listings
 
 ### Get listings filtered (category + status)
-GET {{baseUrl}}/listings?category=ELECTRONICS&status=ACTIVE
+GET {{baseUrl}}/api/listings?category=ELECTRONICS&status=ACTIVE
 
 ### Get listings filtered (seller dashboard)
-GET {{baseUrl}}/listings?sellerId={{userIdSeller}}
+GET {{baseUrl}}/api/listings?sellerId={{userIdSeller}}
 
 ### Get listings filtered (price range)
-GET {{baseUrl}}/listings?minPrice=50&maxPrice=300
+GET {{baseUrl}}/api/listings?minPrice=50&maxPrice=300
 
 ### Search listings by title (regex contains, case-insensitive)
-GET {{baseUrl}}/listings?q=monitor
+GET {{baseUrl}}/api/listings?q=monitor
 
 ### Get listing by id
-GET {{baseUrl}}/listings/{{listingId}}
+GET {{baseUrl}}/api/listings/{{listingId}}
 
 ### Patch listing (partial update)
-PATCH {{baseUrl}}/listings/{{listingId}}
+PATCH {{baseUrl}}/api/listings/{{listingId}}
 Content-Type: {{json}}
 
 {
@@ -96,7 +96,7 @@ Content-Type: {{json}}
 }
 
 ### Put listing (full replace)
-PUT {{baseUrl}}/listings/{{listingId}}
+PUT {{baseUrl}}/api/listings/{{listingId}}
 Content-Type: {{json}}
 
 {
@@ -110,14 +110,14 @@ Content-Type: {{json}}
 }
 
 ### Delete listing
-DELETE {{baseUrl}}/listings/{{listingId}}
+DELETE {{baseUrl}}/api/listings/{{listingId}}
 
 # ============================================================
 # OFFERS
 # ============================================================
 
 ### Create offer on a listing
-POST {{baseUrl}}/offers
+POST {{baseUrl}}/api/offers
 Content-Type: {{json}}
 
 {
@@ -128,22 +128,22 @@ Content-Type: {{json}}
 }
 
 ### Get all offers (no filters)
-GET {{baseUrl}}/offers
+GET {{baseUrl}}/api/offers
 
 ### Get offers for a listing (seller view)
-GET {{baseUrl}}/offers?listingId={{listingId}}
+GET {{baseUrl}}/api/offers?listingId={{listingId}}
 
 ### Get offers by buyer (buyer view)
-GET {{baseUrl}}/offers?buyerId={{userIdBuyer}}
+GET {{baseUrl}}/api/offers?buyerId={{userIdBuyer}}
 
 ### Get offers by status
-GET {{baseUrl}}/offers?status=PENDING
+GET {{baseUrl}}/api/offers?status=PENDING
 
 ### Get offer by id
-GET {{baseUrl}}/offers/{{offerId}}
+GET {{baseUrl}}/api/offers/{{offerId}}
 
 ### Withdraw offer (buyer)
-PATCH {{baseUrl}}/offers/{{offerId}}/withdraw
+PATCH {{baseUrl}}/api/offers/{{offerId}}/withdraw
 Content-Type: {{json}}
 
 {
@@ -151,7 +151,7 @@ Content-Type: {{json}}
 }
 
 ### Decline offer (seller)
-PATCH {{baseUrl}}/offers/{{offerId}}/decline
+PATCH {{baseUrl}}/api/offers/{{offerId}}/decline
 Content-Type: {{json}}
 
 {
@@ -159,7 +159,7 @@ Content-Type: {{json}}
 }
 
 ### Accept offer (seller) — also declines other pending offers and marks listing SOLD
-PATCH {{baseUrl}}/offers/{{offerId}}/accept
+PATCH {{baseUrl}}/api/offers/{{offerId}}/accept
 Content-Type: {{json}}
 
 {
@@ -167,14 +167,14 @@ Content-Type: {{json}}
 }
 
 ### Delete offer (hard delete)
-# DELETE {{baseUrl}}/offers/{{offerId}}
+# DELETE {{baseUrl}}/api/offers/{{offerId}}
 
 # ============================================================
 # TRANSACTIONS
 # ============================================================
 
 ### Create transaction (finalize purchase from ACCEPTED offer)
-POST {{baseUrl}}/transactions
+POST {{baseUrl}}/api/transactions
 Content-Type: {{json}}
 
 {
@@ -183,24 +183,24 @@ Content-Type: {{json}}
 }
 
 ### Get all transactions
-GET {{baseUrl}}/transactions
+GET {{baseUrl}}/api/transactions
 
 ### Get transactions by seller
-GET {{baseUrl}}/transactions?sellerId={{userIdSeller}}
+GET {{baseUrl}}/api/transactions?sellerId={{userIdSeller}}
 
 ### Get transactions by buyer
-GET {{baseUrl}}/transactions?buyerId={{userIdBuyer}}
+GET {{baseUrl}}/api/transactions?buyerId={{userIdBuyer}}
 
 ### Get transactions by listing
-GET {{baseUrl}}/transactions?listingId={{listingId}}
+GET {{baseUrl}}/api/transactions?listingId={{listingId}}
 
 ### Get transaction by id
-GET {{baseUrl}}/transactions/{{txId}}
+GET {{baseUrl}}/api/transactions/{{txId}}
 
 
 
 # ### Cancel transaction 
-# PATCH {{baseUrl}}/transactions/{{txId}}/cancel
+# PATCH {{baseUrl}}/api/transactions/{{txId}}/cancel
 # Content-Type: {{json}}
 
 # {
@@ -208,7 +208,7 @@ GET {{baseUrl}}/transactions/{{txId}}
 # }
 
 # ### Refund transaction 
-# PATCH {{baseUrl}}/transactions/{{txId}}/refund
+# PATCH {{baseUrl}}/api/transactions/{{txId}}/refund
 # Content-Type: {{json}}
 
 # {
@@ -216,4 +216,4 @@ GET {{baseUrl}}/transactions/{{txId}}
 # }
 
 # ### Delete transaction
-# DELETE {{baseUrl}}/transactions/{{txId}}
+# DELETE {{baseUrl}}/api/transactions/{{txId}}
