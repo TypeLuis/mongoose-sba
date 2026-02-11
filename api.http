@@ -5,12 +5,12 @@
 # -----------------------------
 # IDs (paste real ObjectIds here)
 # -----------------------------
-@userIdSeller = 65f000000000000000000001
-@userIdBuyer  = 65f000000000000000000002
+@userIdSeller = 698ccaa13915b490c4752cd5
+@userIdBuyer  = 698ccaa13915b490c4752cdc
 
-@listingId = 65f000000000000000000101
-@offerId   = 65f000000000000000000201
-@txId      = 65f000000000000000000301
+@listingId = 698ccaa13915b490c4752cdc
+@offerId   = 698ccaa13915b490c4752ce8
+@txId      = 698ccaa33915b490c4752d2a
 
 # ============================================================
 # USERS
