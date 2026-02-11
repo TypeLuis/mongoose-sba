@@ -7,7 +7,7 @@ const router = express.Router()
 router
   .route("/")
 
-  .post(userController.createUser)
+  .post(requireBody(["username", "displayName"]), userController.createUser)
 
   .get(userController.getUsers)
 

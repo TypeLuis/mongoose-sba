@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 const isValidId = (id: string) => mongoose.Types.ObjectId.isValid(id)
 
 const userController = {
-    createUser : (requireBody(["username", "displayName"]), async (req, res, next) => {
+    createUser : (async (req, res, next) => {
         try {
           const newUser = await User.create(req.body)
           res.status(201).json(newUser)
