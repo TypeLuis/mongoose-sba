@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 const isValidId = (id: string) => mongoose.Types.ObjectId.isValid(id)
 
 const userController = {
+    // Create User
     createUser : (async (req, res, next) => {
         try {
           const newUser = await User.create(req.body)
@@ -18,6 +19,7 @@ const userController = {
         }
     }) as RequestHandler,
 
+    // Get all users
     getUsers :  (async (_req, res, next) => {
         try {
           const allUsers = await User.find({}).sort({ createdAt: -1 }) // finds all the users created at in decending order
@@ -27,6 +29,7 @@ const userController = {
         }
     }) as RequestHandler,
 
+    // get User by ID
     getUser : (async (req, res, next) => {
         const id = String(req.params.id)
         if (!isValidId(id)) {
@@ -44,6 +47,7 @@ const userController = {
         }
     }) as RequestHandler,
 
+    // Update User by ID
     updateUser : (async (req, res, next) => {
         const id = String(req.params.id)
         if (!isValidId(id)) {
@@ -70,6 +74,7 @@ const userController = {
         }
     }) as RequestHandler,
 
+    // Delete User by ID
     deleteUser : (async (req, res, next) => {
         const id = String(req.params.id)
         if (!isValidId(id)) {
