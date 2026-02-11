@@ -2,7 +2,7 @@
 
 
 - `npm run env` & populate env,  
-**node -e in package.json means to evaluate the JS code. makes it so we do have to create a file**
+**node -e in package.json means to evaluate the JS code. makes it so we don't have to create a file**
 
 
 - `npm i`
