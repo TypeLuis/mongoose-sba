@@ -5,7 +5,6 @@ import notFound from "./middleware/notFound.js";
 import logReq from "./middleware/logReq.js";
 import dotenv from "dotenv";
 import connectDB from "./database/conn.js";
-import testRoutes from "./routes/testRoutes.js";
 import cors from "cors";
 import helmet from "helmet";
 
@@ -30,7 +29,6 @@ app.get('/', (_req, res, _next) => {
     res.send('Hello!')
 })
 
-app.use('/api/test', testRoutes)
 
 
 
