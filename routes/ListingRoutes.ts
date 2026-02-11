@@ -2,7 +2,6 @@ import express from "express";
 import requireBody from "../middleware/requireBody.js";
 import listingController from "../controller/listingController.js";
 
-
 const router = express.Router();
 
 router
