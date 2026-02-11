@@ -17,9 +17,9 @@
 - `npm run dev`
 
 
-- ## to see the pdf file, download the pdf viewer extention by `Mathematic inc`
+- ### to see the pdf file, download the pdf viewer extention by `Mathematic inc`
 
-- ## MAKE SURE REST CLIENT IS INSTALLED TO USE app.http
+- ### MAKE SURE REST CLIENT IS INSTALLED TO USE app.http
 
 # API ROUTES
 
