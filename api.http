@@ -1,43 +1,219 @@
 // MAKE SURE REST CLIENT IS INSTALLED TO USE THIS FILE
+@baseUrl = http://localhost:3020
+@json = application/json
 
-// TEST ROUTES //
+# -----------------------------
+# IDs (paste real ObjectIds here)
+# -----------------------------
+@userIdSeller = 65f000000000000000000001
+@userIdBuyer  = 65f000000000000000000002
 
-// Creates an item
-POST http://localhost:3040/api/test/
-Content-Type: application/json
+@listingId = 65f000000000000000000101
+@offerId   = 65f000000000000000000201
+@txId      = 65f000000000000000000301
 
-{
-    "name": "Green Onion",
-    "category": "Vegetables",
-    "price": 1.29,
-    "stocked": true
-}
+# ============================================================
+# USERS
+# ============================================================
 
-###
-
-// GETS all item
-GET http://localhost:3040/api/test/
-
-###
-
-// Updates JSON
-// SWAP ID with actual ID
-PUT http://localhost:3040/api/test/:ID
-Content-Type: application/json
+### Create user
+POST {{baseUrl}}/users
+Content-Type: {{json}}
 
 {
-    "price": 1.59,
-    "stocked": false
+  "username": "luis",
+  "displayName": "Luis Lopez"
 }
 
-###
+### Get all users
+GET {{baseUrl}}/users
 
-// Deletes an Item
-// SWAP ID with actual ID
-DELETE http://localhost:3040/api/test/:ID
+### Get user by id
+GET {{baseUrl}}/users/{{userIdSeller}}
 
-###
+### Patch user (partial update)
+PATCH {{baseUrl}}/users/{{userIdSeller}}
+Content-Type: {{json}}
 
-// Gets one Item
-// SWAP ID with actual ID
-GET  http://localhost:3040/api/test/:ID
+{
+  "displayName": "Luis L."
+}
+
+### Put user (full replace)
+PUT {{baseUrl}}/users/{{userIdSeller}}
+Content-Type: {{json}}
+
+{
+  "username": "luis",
+  "displayName": "Luis Lopez"
+}
+
+### Delete user
+DELETE {{baseUrl}}/users/{{userIdSeller}}
+
+# ============================================================
+# LISTINGS
+# ============================================================
+
+### Create listing
+POST {{baseUrl}}/listings
+Content-Type: {{json}}
+
+{
+  "sellerId": "{{userIdSeller}}",
+  "title": "Gaming Monitor 144Hz",
+  "description": "27 inch 144Hz gaming monitor.",
+  "category": "ELECTRONICS",
+  "condition": "GOOD",
+  "price": 250
+}
+
+### Get all listings (no filters)
+GET {{baseUrl}}/listings
+
+### Get listings filtered (category + status)
+GET {{baseUrl}}/listings?category=ELECTRONICS&status=ACTIVE
+
+### Get listings filtered (seller dashboard)
+GET {{baseUrl}}/listings?sellerId={{userIdSeller}}
+
+### Get listings filtered (price range)
+GET {{baseUrl}}/listings?minPrice=50&maxPrice=300
+
+### Search listings by title (regex contains, case-insensitive)
+GET {{baseUrl}}/listings?q=monitor
+
+### Get listing by id
+GET {{baseUrl}}/listings/{{listingId}}
+
+### Patch listing (partial update)
+PATCH {{baseUrl}}/listings/{{listingId}}
+Content-Type: {{json}}
+
+{
+  "price": 240,
+  "description": "Price drop! 27 inch 144Hz, great condition."
+}
+
+### Put listing (full replace)
+PUT {{baseUrl}}/listings/{{listingId}}
+Content-Type: {{json}}
+
+{
+  "sellerId": "{{userIdSeller}}",
+  "title": "Gaming Monitor 144Hz",
+  "description": "27 inch 144Hz gaming monitor.",
+  "category": "ELECTRONICS",
+  "condition": "GOOD",
+  "price": 240,
+  "status": "ACTIVE"
+}
+
+### Delete listing
+DELETE {{baseUrl}}/listings/{{listingId}}
+
+# ============================================================
+# OFFERS
+# ============================================================
+
+### Create offer on a listing
+POST {{baseUrl}}/offers
+Content-Type: {{json}}
+
+{
+  "listingId": "{{listingId}}",
+  "buyerId": "{{userIdBuyer}}",
+  "offerPrice": 220,
+  "message": "Can pick up today if available."
+}
+
+### Get all offers (no filters)
+GET {{baseUrl}}/offers
+
+### Get offers for a listing (seller view)
+GET {{baseUrl}}/offers?listingId={{listingId}}
+
+### Get offers by buyer (buyer view)
+GET {{baseUrl}}/offers?buyerId={{userIdBuyer}}
+
+### Get offers by status
+GET {{baseUrl}}/offers?status=PENDING
+
+### Get offer by id
+GET {{baseUrl}}/offers/{{offerId}}
+
+### Withdraw offer (buyer)
+PATCH {{baseUrl}}/offers/{{offerId}}/withdraw
+Content-Type: {{json}}
+
+{
+  "buyerId": "{{userIdBuyer}}"
+}
+
+### Decline offer (seller)
+PATCH {{baseUrl}}/offers/{{offerId}}/decline
+Content-Type: {{json}}
+
+{
+  "sellerId": "{{userIdSeller}}"
+}
+
+### Accept offer (seller) — also declines other pending offers and marks listing SOLD
+PATCH {{baseUrl}}/offers/{{offerId}}/accept
+Content-Type: {{json}}
+
+{
+  "sellerId": "{{userIdSeller}}"
+}
+
+### Delete offer (hard delete)
+# DELETE {{baseUrl}}/offers/{{offerId}}
+
+# ============================================================
+# TRANSACTIONS
+# ============================================================
+
+### Create transaction (finalize purchase from ACCEPTED offer)
+POST {{baseUrl}}/transactions
+Content-Type: {{json}}
+
+{
+  "offerId": "{{offerId}}",
+  "sellerId": "{{userIdSeller}}"
+}
+
+### Get all transactions
+GET {{baseUrl}}/transactions
+
+### Get transactions by seller
+GET {{baseUrl}}/transactions?sellerId={{userIdSeller}}
+
+### Get transactions by buyer
+GET {{baseUrl}}/transactions?buyerId={{userIdBuyer}}
+
+### Get transactions by listing
+GET {{baseUrl}}/transactions?listingId={{listingId}}
+
+### Get transaction by id
+GET {{baseUrl}}/transactions/{{txId}}
+
+
+
+# ### Cancel transaction 
+# PATCH {{baseUrl}}/transactions/{{txId}}/cancel
+# Content-Type: {{json}}
+
+# {
+#   "sellerId": "{{userIdSeller}}"
+# }
+
+# ### Refund transaction 
+# PATCH {{baseUrl}}/transactions/{{txId}}/refund
+# Content-Type: {{json}}
+
+# {
+#   "sellerId": "{{userIdSeller}}"
+# }
+
+# ### Delete transaction
+# DELETE {{baseUrl}}/transactions/{{txId}}

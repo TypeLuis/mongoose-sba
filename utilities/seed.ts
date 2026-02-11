@@ -1,27 +1,36 @@
-import mongoose from "mongoose";
+import mongoose, { type Model } from "mongoose";
 import dotenv from "dotenv"
-import testSchema from "../models/testSchema.js";
-import {testSeed} from "./data.js";
+import User from "../models/userSchema.js";
+import Listing from "../models/listingSchema.js";
+import Offer from "../models/offerSchema.js";
+import Transaction from "../models/transactionSchema.js";
+import {offers,users,transactions,listings} from "./data.js";
 
 dotenv.config()
 
 const connectionStr = process.env.MONGODB_URI || ""
 
+const seedData = async <T> (model: Model<T>, data:any[]): Promise<void> => {
+    await model.deleteMany({})
+    await model.insertMany(data)
+}
+
 async function seedDatabase(){
     try {
         await mongoose.connect(connectionStr)
 
-        await testSchema.deleteMany({})
+        seedData(User, users)
+        seedData(Listing, listings)
+        seedData(Offer, offers)
+        seedData(Transaction, transactions)
 
-        await testSchema.create(testSeed)
+        console.log("Data seeded successfully")
 
-        console.log("Data seeded")
-
-        process.exit(1)
+        process.exit(0) // script finished successfully
 
     } catch (error) {
         console.error(error)
-        process.exit(1)
+        process.exit(1) // script exited with error
     }
 }
 
